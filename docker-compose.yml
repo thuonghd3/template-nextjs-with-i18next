@@ -1,0 +1,15 @@
+version: '2.1'
+
+services:
+
+  webapp:
+    image: viewpals_web_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - viewpals_web_network
+networks:
+    viewpals_web_network:
+        driver: bridge

@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "alwaysStrict": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "lib": ["dom", "es2017"],
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noEmit": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "esnext",
+        "baseUrl": "./",
+        /* Base directory to resolve non-absolute module names. */
+        "paths": {
+            /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+            "@lib/*": ["./lib/*"], // alias similar to defined in babel.config.js
+            "assets/*": ["./assets/*"], 
+        },
+    },
+    "exclude": ["node_modules", ".next", "out"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "assets/index.d.ts",]
+}

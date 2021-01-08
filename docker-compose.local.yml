@@ -1,0 +1,6 @@
+version: "2.1"
+services:
+    webapp:
+        container_name: viewpals_web_local
+        ports:
+            - "8518:3000"

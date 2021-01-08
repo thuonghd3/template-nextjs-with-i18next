@@ -1,0 +1,14 @@
+node_modules/**
+
+.commitlintrc.js
+.eslintrc.js
+.huskyrc.js
+babel.config.js
+metro.config.js
+
+next.config.js
+next-env.d.ts
+.next/**
+
+Dockerfile
+docker-compose.yml
