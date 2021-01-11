@@ -8,7 +8,7 @@ interface IProps {
     t: TFunction;
 }
 
-const HomePage: NextPage<IProps> = ({ t }) => {
+const AboutPage: NextPage<IProps> = ({ t }) => {
     return (
         <>
             <Link href="/">
@@ -20,9 +20,9 @@ const HomePage: NextPage<IProps> = ({ t }) => {
     );
 };
 
-export default withTranslation('common')(HomePage);
+export default withTranslation('common')(AboutPage);
 
-HomePage.defaultProps = {
+AboutPage.defaultProps = {
     namespacesRequired: ['common'],
 };
 

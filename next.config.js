@@ -23,4 +23,8 @@ module.exports = {
     publicRuntimeConfig: {
         localeSubpaths,
     },
+    // i18n: {
+    //     locales: ['en', 'de'],
+    //     defaultLocale: 'en',
+    // },
 };

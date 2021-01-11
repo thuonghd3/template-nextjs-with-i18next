@@ -1,15 +1,13 @@
-import { FC } from 'react';
 import Link from 'next/link';
-// import { GetServerSideProps } from 'next';
-import { TFunction } from 'next-i18next';
+import { NextPage, GetServerSideProps } from 'next';
+import { WithTranslation } from 'next-i18next';
 import { withTranslation } from 'i18n';
 
-interface IProps {
-    t: TFunction;
+interface IProps extends WithTranslation {
     namespacesRequired: string[];
 }
 
-const HomePage: FC<IProps> = ({ t }) => {
+const HomePage: NextPage<IProps> = ({ t }) => {
     return (
         <>
             <div>{t('hello')}</div>
@@ -30,11 +28,11 @@ HomePage.defaultProps = {
     namespacesRequired: ['common'],
 };
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//     return {
-//         props: {
-//             title: 'aaaa',
-//             description: 'bbbb',
-//         },
-//     };
-// };
+export const getServerSideProps: GetServerSideProps = async () => {
+    return {
+        props: {
+            title: 'aaaa',
+            description: 'bbbb',
+        },
+    };
+};
