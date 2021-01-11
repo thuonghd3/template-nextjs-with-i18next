@@ -86,7 +86,9 @@ interface AppCustomContextType extends AppContextType<Router> {
     >;
 }
 
-App.getInitialProps = async (appContext: AppCustomContextType) => {
+App.getInitialProps = async (
+    appContext: AppCustomContextType,
+): Promise<Record<string, unknown>> => {
     const appProps = await NextApp.getInitialProps(appContext);
     const { defaultProps } = appContext.Component;
 
