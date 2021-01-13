@@ -1,11 +1,10 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
+import { WithTranslation, withTranslation } from 'next-i18next';
 import Link from 'next/link';
-import { TFunction } from 'next-i18next';
-import { withTranslation } from 'i18n';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-interface IProps {
+interface IProps extends WithTranslation {
     namespacesRequired: string[];
-    t: TFunction;
 }
 
 const AboutPage: NextPage<IProps> = ({ t }) => {
@@ -26,11 +25,10 @@ AboutPage.defaultProps = {
     namespacesRequired: ['common'],
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-    return {
-        props: {
-            title: 'About Page',
-            description: 'This is description about page',
-        },
-    };
-};
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ['common'])),
+        title: 'About page',
+        description: 'This is desciption for the About page',
+    },
+});

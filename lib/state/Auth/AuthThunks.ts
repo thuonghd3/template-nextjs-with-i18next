@@ -11,10 +11,13 @@ export const userLogin: (info: UserAuthInfo) => AppThunk<Promise<void>> = (
     //     OrderReducer.getReducerState(_getState()),
     // );
     const payload = { ...info };
+    // eslint-disable-next-line no-console
+    console.log(payload);
     // if (orderIds.length > 0) {
     //     payload.orders = orderIds;
     // }
-    const token = await container.cradle.authService.login(payload);
+    // const token = await container.cradle.authService.login(payload);
+    const token = 'mock token';
     // if (orderIds.length > 0) {
     //     dispatch(OrderActions.removeOrderIds());
     // }

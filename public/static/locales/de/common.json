@@ -1,3 +1,10 @@
 {
-    "hello": "DE: Hello world!"
+    "hello": "DE: Hello world!",
+    "meta": {
+        "login": {
+            "title": "DE: Login Page",
+            "description": "DE: This description for the login page"
+        }
+    },
+    "change_locale": "DE: Change-locale"
 }

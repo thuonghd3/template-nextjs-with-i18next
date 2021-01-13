@@ -1,7 +1,9 @@
+import Layout from 'components/Layout';
+// import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import { NextPage, GetServerSideProps } from 'next';
-import { WithTranslation } from 'next-i18next';
-import { withTranslation } from 'i18n';
+import { NextPage, GetStaticProps } from 'next';
+import { WithTranslation, withTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 interface IProps extends WithTranslation {
     namespacesRequired: string[];
@@ -9,30 +11,28 @@ interface IProps extends WithTranslation {
 
 const HomePage: NextPage<IProps> = ({ t }) => {
     return (
-        <>
-            <div>{t('hello')}</div>
-            <Link href="/about">
-                <a>About page</a>
-            </Link>
-            <br />
-            <Link href="/posts/123">
-                <a>Post Page</a>
-            </Link>
-        </>
+        <Layout>
+            <h1>{t('hello')}</h1>
+            <div>
+                <Link href="/about">
+                    <a className="py-4">About page</a>
+                </Link>
+            </div>
+            <div>
+                <Link href="/posts/123">
+                    <a className="py-4">Post Page</a>
+                </Link>
+            </div>
+        </Layout>
     );
 };
 
 export default withTranslation('common')(HomePage);
 
-HomePage.defaultProps = {
-    namespacesRequired: ['common'],
-};
-
-export const getServerSideProps: GetServerSideProps = async () => {
-    return {
-        props: {
-            title: 'aaaa',
-            description: 'bbbb',
-        },
-    };
-};
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+    props: {
+        ...(await serverSideTranslations(locale, ['common', 'header'])),
+        title: 'Home page',
+        description: 'This is desciption for home page',
+    },
+});

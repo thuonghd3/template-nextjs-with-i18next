@@ -1,5 +1,5 @@
-const { nextI18NextRewrites } = require('next-i18next/rewrites');
-const localeSubpaths = { en: 'en', de: 'de' };
+// const { nextI18NextRewrites } = require('next-i18next/rewrites');
+// const localeSubpaths = { en: 'en', de: 'de' };
 
 module.exports = {
     /* config options here */
@@ -19,12 +19,12 @@ module.exports = {
 
         return config;
     },
-    rewrites: async () => nextI18NextRewrites(localeSubpaths),
-    publicRuntimeConfig: {
-        localeSubpaths,
-    },
-    // i18n: {
-    //     locales: ['en', 'de'],
-    //     defaultLocale: 'en',
+    // rewrites: async () => nextI18NextRewrites(localeSubpaths),
+    // publicRuntimeConfig: {
+    //     localeSubpaths,
     // },
+    i18n: {
+        defaultLocale: 'en',
+        locales: ['en', 'de'],
+    },
 };

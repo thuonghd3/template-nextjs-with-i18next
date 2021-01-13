@@ -9,8 +9,10 @@ export type UserInfo = {
 
 export const userAuthInfoSchema = yup.object({
     email: yup.string().required('Email is required').email('Email is invalid'),
-    password: yup.string().required('Password is required').min(8),
-    orders: yup.array(yup.string()),
+    password: yup
+        .string()
+        .min(8, 'Password must be at least 8 characters')
+        .required('Password is required'),
 });
 
 export type UserAuthInfo = yup.InferType<typeof userAuthInfoSchema>;

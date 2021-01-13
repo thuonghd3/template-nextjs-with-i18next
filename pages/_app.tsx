@@ -3,24 +3,21 @@ import 'assets/styles/global.css';
 import { useEffect } from 'react';
 
 import { APP_CONFIG } from '@lib/constants';
-import NextApp, { AppProps } from 'next/app';
+import { AppProps } from 'next/app';
 import { AppThunkDispatch } from '@lib/state/types';
 import { AuthThunks } from '@lib/state/thunks';
 // import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import container from '@lib/container';
 // import { persistStore } from 'redux-persist';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useStore } from '@lib/state/store';
 // import TagManager from 'react-gtm-module';
 import Head from 'components/SEO/Head';
-import { appWithTranslation } from 'i18n';
-import {
-    AppContextType,
-    NextComponentType,
-    NextPageContext,
-} from 'next/dist/next-server/lib/utils';
+import { appWithTranslation, useTranslation } from 'next-i18next';
 
+// import { AppContextType } from 'next/dist/next-server/lib/utils';
+// import { NextComponentType, NextPageContext } from 'next';
 // const tagManagerArgs = {
 //     gtmId: 'GTM-5T3H9B6',
 // };
@@ -30,10 +27,17 @@ import {
 // }
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
+    // console.log({ pageProps });
     const store = useStore(pageProps.initialReduxState);
-    // const persistor = persistStore(store);
+    // const persistor = persistStore(store, {}, (): void => {
+    //     persistor.persist();
+    // });
+    const { t } = useTranslation(['common']);
     const router = useRouter();
-
+    const lang = router.asPath.startsWith('/de') ? 'de' : 'en';
+    useEffect(() => {
+        document.documentElement.lang = lang;
+    }, [lang]);
     // client unauthorized event handler
     useEffect(() => {
         // dispatch logout action when api return unauthorized
@@ -56,7 +60,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
     const { title, description, image } = pageProps;
     return (
         <>
-            <Head title={title} description={description} image={image} />
+            <Head t={t} title={title} description={description} image={image} />
             <Provider store={store}>
                 <Component {...pageProps} />
             </Provider>
@@ -64,6 +68,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
     );
     // return (
     //     <>
+    //         <Head t={t} title={title} description={description} image={image} />
     //         <Provider store={store}>
     //             <PersistGate
     //                 loading={<div>Loading...</div>}
@@ -78,27 +83,28 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
 
 export default appWithTranslation(App);
 
-interface AppCustomContextType extends AppContextType<Router> {
-    Component: NextComponentType<
-        NextPageContext,
-        { namespacesRequired: string[] },
-        { namespacesRequired?: string[] }
-    >;
-}
+// if not use next-i18next
 
-App.getInitialProps = async (
-    appContext: AppCustomContextType,
-): Promise<Record<string, unknown>> => {
-    const appProps = await NextApp.getInitialProps(appContext);
-    const { defaultProps } = appContext.Component;
+// interface AppCustomContextType extends AppContextType<Router> {
+//     Component: NextComponentType<
+//         NextPageContext,
+//         { namespacesRequired: string[] },
+//         { namespacesRequired?: string[] }
+//     >;
+// }
 
-    return {
-        ...appProps,
-        pageProps: {
-            namespacesRequired: [
-                ...(appProps.pageProps.namespacesRequired || []),
-                ...(defaultProps?.namespacesRequired || []),
-            ],
-        },
-    };
-};
+// App.getInitialProps = async (
+//     appContext: AppCustomContextType,
+// ): Promise<Record<string, unknown>> => {
+//     const appProps = await NextApp.getInitialProps(appContext);
+//     const { defaultProps } = appContext.Component;
+//     return {
+//         ...appProps,
+//         pageProps: {
+//             namespacesRequired: [
+//                 ...(appProps.pageProps.namespacesRequired || []),
+//                 ...(defaultProps?.namespacesRequired || []),
+//             ],
+//         },
+//     };
+// };

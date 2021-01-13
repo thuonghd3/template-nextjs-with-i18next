@@ -24,3 +24,7 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.height-full-screen {
+    height: calc(100vh - 4rem);
+}

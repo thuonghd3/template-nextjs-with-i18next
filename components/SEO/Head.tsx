@@ -1,5 +1,6 @@
 import { memo, useMemo } from 'react';
 import Head from 'next/head';
+import { TFunction } from 'next-i18next';
 
 export const siteTitle = 'Viewpals - The Best YouTube Promotion Tool';
 const defaultDescription =
@@ -27,18 +28,19 @@ export type MetaTagsProps = {
     tags?: string;
     location?: Location;
     schema?: string;
+    t: TFunction;
 };
 
-export default memo(({ title, description, ...rest }: MetaTagsProps) => {
+export default memo(({ t, title, description, ...rest }: MetaTagsProps) => {
     const titleChecked = useMemo(() => {
         if (rest.titleDefault) {
             return rest.titleDefault;
         }
         if (title) {
-            return title + defaultSep + siteTitle;
+            return t(title) + defaultSep + siteTitle;
         }
         return siteTitle;
-    }, [title, rest.titleDefault]);
+    }, [title, rest.titleDefault, t]);
 
     const desc = useMemo(() => description || defaultDescription, [
         description,
@@ -47,11 +49,11 @@ export default memo(({ title, description, ...rest }: MetaTagsProps) => {
     return (
         <Head>
             <title>{titleChecked}</title>
-            <meta name="description" content={desc} />
-            <meta
+            <meta name="description" content={t(desc)} />
+            {/* <meta
                 name="viewport"
-                content="width=device-width, initial-scale=1, maximum-scale=1"
-            />
+                content="width=device-width, initial-scale=1, maximum-scale=5"
+            /> */}
             <meta
                 property="og:image"
                 content={rest.image ? rest.image : defaultImage}

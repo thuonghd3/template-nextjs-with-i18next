@@ -1,3 +1,9 @@
 {
-    "hello": "Hello world!"
+    "hello": "Hello world!",
+    "meta": {
+        "login": {
+            "title": "Login Page",
+            "description": "This description for the login page"
+        }
+    }
 }

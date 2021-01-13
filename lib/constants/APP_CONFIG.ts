@@ -10,4 +10,5 @@ export default {
     longAnimationDelay: 1000, // ms
     prefixReducer: 'resume_builder',
     privateRedirectRoute: '/login',
+    publicRedirectRoute: '/',
 };

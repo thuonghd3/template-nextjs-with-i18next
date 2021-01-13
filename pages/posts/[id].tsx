@@ -1,14 +1,12 @@
 import { GetServerSideProps, NextPage } from 'next';
+import { WithTranslation, withTranslation } from 'next-i18next';
 import Link from 'next/link';
-import { TFunction } from 'next-i18next';
-import { withTranslation } from 'i18n';
 
-interface IProps {
+interface IProps extends WithTranslation {
     post?: {
         id: string;
         name: string;
     };
-    t: TFunction;
     namespacesRequired: string[];
 }
 
@@ -49,6 +47,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
             post: res,
             title: 'Post 1',
             description: 'this is description post 1',
+            namespacesRequired: ['common'],
         },
     };
 };

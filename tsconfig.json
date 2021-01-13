@@ -23,8 +23,17 @@
             /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
             "@lib/*": ["./lib/*"], // alias similar to defined in babel.config.js
             "assets/*": ["./assets/*"], 
+            "components/*": ["./components/*"],
         },
     },
     "exclude": ["node_modules", ".next", "out"],
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "assets/index.d.ts",]
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.js",
+        "assets/index.d.ts",
+        "next-i18next.serverSideTranslations.d.ts",
+        "next-i18next.extend.d.ts"
+    ]
 }
